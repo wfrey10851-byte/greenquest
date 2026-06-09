@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Justice | GreenQuest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --climate-color: #f59e0b;
+            --climate-light: #fef3c7;
+            --climate-dark: #d97706;
+            --dark-color: #1f2937;
+            --light-color: #f9fafb;
+            --gray-color: #6b7280;
+            --white-color: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --border-radius: 16px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            line-height: 1.8;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* 头部导航 */
+        header {
+            background-color: var(--white-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--climate-color);
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--climate-color);
+            background-color: var(--climate-light);
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--climate-color), var(--climate-dark));
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--climate-light);
+            color: var(--climate-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* 主内容区 - 线性学习路径 */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-header h2 {
+            font-size: 2.2rem;
+            color: var(--climate-dark);
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: var(--gray-color);
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* 进度条容器 */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--climate-light);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        /* 时间线项目 */
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        /* 左侧项目 */
+        .timeline-item.left {
+            left: 0;
+        }
+
+        /* 右侧项目 */
+        .timeline-item.right {
+            left: 50%;
+        }
+
+        /* 圆点 */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--white-color);
+            border: 4px solid var(--climate-color);
+            border-radius: 50%;
+            top: 20px;
+            z-index: 1;
+        }
+
+        .timeline-item.left::after {
+            right: -10px;
+        }
+
+        .timeline-item.right::after {
+            left: -10px;
+        }
+
+        /* 内容卡片 */
+        .timeline-content {
+            padding: 2rem;
+            background: var(--white-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.1);
+        }
+
+        .timeline-content h3 {
+            color: var(--climate-dark);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-content h3 span {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--climate-light);
+            color: var(--climate-color);
+            text-align: center;
+            line-height: 30px;
+            font-size: 0.9rem;
+        }
+
+        .timeline-content p {
+            color: var(--gray-color);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .timeline-content .btn-learn {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background-color: var(--climate-color);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .timeline-content .btn-learn:hover {
+            background-color: var(--climate-dark);
+        }
+
+        /* 响应式适配 */
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item.right {
+                left: 0%;
+            }
+            
+            .timeline-item.left::after, .timeline-item.right::after {
+                left: 21px;
+            }
+        }
+
+        /* 底部 */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--light-color);
+            background: var(--white-color);
+            margin-top: 4rem;
+        }
+
+        /* 登录弹窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 400px;
+            box-shadow: var(--shadow);
+        }
+
+        .close {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-color);
+            transition: var(--transition);
+        }
+
+        .close:hover {
+            color: var(--dark-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--climate-color);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        /* 通知样式 */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-left: 4px solid var(--climate-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            color: var(--dark-color);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 2001;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            border-left-color: #ef4444;
+        }
+
+        .notification.info {
+            border-left-color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+        <header>
+        <div class="container header-content">
+            <a href="home.html" class="logo">
+    		  <div class="logo-icon">
+        	    <img src="image/1.jpg" alt="GreenQuest Logo" style="width: 100%; height: 100%; object-fit: contain;">
+    	</div>
+    	<div class="logo-text">GreenQuest</div>
+    </a>
+            <nav class="nav-links">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="climate.html" class="nav-link active">Learn</a>
+                <a href="#" class="nav-link">Challenges</a>
+                <a href="#" class="nav-link">Community</a>
+                <a href="#" class="nav-link">Achievements</a>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-primary" id="loginBtn">Login / Sign Up</button>
+                <div class="user-avatar" id="userAvatar" style="display: none;">U</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 - 线性时间线 -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h2>Climate Justice Learning Journey</h2>
+                <p>Follow a structured path to understand climate justice — from foundational concepts to real-world applications and advocacy.</p>
+            </div>
+
+            <!-- 时间线 -->
+            <div class="timeline">
+                <!-- Chapter 1 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3><span>1</span> What is Climate Justice?</h3>
+                        <p>Core definitions, principles, and the critical distinction between equity and equality in climate action.</p>
+                        <a href="climate 1.html" class="btn-learn">Start Learning</a>
+                    </div>
+                </div>
+
+                <!-- Chapter 2 -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3><span>2</span> Development of Climate Justice</h3>
+                        <p>Global climate agreements: UNFCCC, Kyoto Protocol, Paris Agreement and their impact on justice.</p>
+                        <a href="climate 2.html" class="btn-learn">Start Learning</a>
+                    </div>
+                </div>
+
+                <!-- Chapter 3 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3><span>3</span> Current Situation</h3>
+                        <p>Global temperature rise and the disproportionate impact on vulnerable communities worldwide.</p>
+                        <a href="climate 3.html" class="btn-learn">Start Learning</a>
+                    </div>
+                </div>
+
+                <!-- Chapter 4 -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3><span>4</span> Native American Perspectives</h3>
+                        <p>Indigenous land stewardship and the systemic environmental racism faced by Native communities.</p>
+                        <a href="climate 4.html" class="btn-learn">Start Learning</a>
+                    </div>
+                </div>
+
+                <!-- Chapter 5 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3><span>5</span> Environmental Racism</h3>
+                        <p>Origins, case studies, and policy solutions to address environmental injustice globally.</p>
+                        <a href="climate 5.html" class="btn-learn">Start Learning</a>
+                    </div>
+                </div>
+
+    </main>
+
+    <!-- 底部 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 GreenQuest - Climate Justice Learning Platform | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- 登录弹窗 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeLogin">&times;</span>
+            <h3>Welcome to GreenQuest</h3>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%">Login</button>
+            </form>
+            <div class="login-links" style="text-align:center; margin-top:1.5rem; font-size:0.9rem;">
+                <a href="#" style="color:var(--climate-color); text-decoration:none;">Create Account</a>
+                <span style="margin:0 0.5rem; color:var(--gray-color);">|</span>
+                <a href="#" style="color:var(--climate-color); text-decoration:none;">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS逻辑 -->
+    <script>
+        // 登录弹窗逻辑
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const closeLogin = document.getElementById('closeLogin');
+
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+            document.getElementById('loginEmail').focus();
+        });
+
+        closeLogin.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // 登录表单提交
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            loginBtn.style.display = 'none';
+            document.getElementById('userAvatar').style.display = 'flex';
+            showNotification('Login successful! Welcome to GreenQuest', 'success');
+        });
+
+        // 通知提示函数
+        function showNotification(message, type = 'success') {
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            let icon = 'fas fa-check-circle';
+            if (type === 'error') icon = 'fas fa-exclamation-circle';
+            if (type === 'info') icon = 'fas fa-info-circle';
+            notification.innerHTML = `<i class="${icon}"></i><span>${message}</span>`;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.classList.add('show'), 10);
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

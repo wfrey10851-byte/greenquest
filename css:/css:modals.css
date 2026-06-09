@@ -1,0 +1,241 @@
+/* css/modals.css */
+/* ====== MODAL STYLES ====== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--gray-color);
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    color: var(--dark-color);
+}
+
+.progress-summary {
+    background: var(--light-color);
+    padding: 20px;
+    border-radius: var(--border-radius-sm);
+    margin: 20px 0;
+}
+
+.progress-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--gray-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.learning-options {
+    margin: 30px 0;
+}
+
+.option-group {
+    margin-bottom: 25px;
+}
+
+.option-group h4 {
+    margin-bottom: 15px;
+    color: var(--dark-color);
+    font-size: 1.1rem;
+}
+
+.option-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: white;
+    border: 2px solid var(--light-gray);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: left;
+}
+
+.option-btn:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.option-btn.completed {
+    background: var(--light-color);
+    border-color: var(--primary-color);
+    cursor: default;
+}
+
+.option-btn.next {
+    border-color: var(--accent-color);
+    background: rgba(139, 92, 246, 0.05);
+}
+
+.option-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.option-btn i {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.option-btn.completed i {
+    color: #10b981;
+}
+
+.option-btn.next i {
+    color: var(--accent-color);
+}
+
+.option-btn span {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.option-btn small {
+    font-size: 12px;
+    color: var(--gray-color);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--light-gray);
+}
+
+.quiz-instructions {
+    background: var(--light-color);
+    padding: 15px;
+    border-radius: var(--border-radius-sm);
+    margin: 20px 0;
+}
+
+.quiz-options {
+    margin: 20px 0;
+}
+
+.quiz-option {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: var(--light-color);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.quiz-option:hover {
+    background: var(--primary-light);
+}
+
+.quiz-option input {
+    margin-right: 15px;
+}
+
+.quiz-navigation, .activity-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.activity-content {
+    margin: 20px 0;
+}
+
+.activity-task {
+    background: var(--light-color);
+    padding: 20px;
+    border-radius: var(--border-radius-sm);
+    margin: 20px 0;
+}
+
+.activity-task ol {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.activity-task li {
+    margin-bottom: 8px;
+}
+
+.activity-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid var(--light-gray);
+    border-radius: var(--border-radius-sm);
+    font-family: inherit;
+    resize: vertical;
+    margin-top: 10px;
+}
+
+.activity-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}

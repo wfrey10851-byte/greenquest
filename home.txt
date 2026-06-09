@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenQuest - Environmental Learning Adventure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ====== CSS VARIABLES & BASE STYLES ====== */
+        :root {
+            --primary-color: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #a7f3d0;
+            --secondary-color: #3b82f6;
+            --accent-color: #8b5cf6;
+            --ecology-color: #22c55e;
+            --climate-color: #f59e0b;
+            --living-color: #06b6d4;
+            --waste-color: #8b5cf6;
+            --trade-color: #ec4899;
+            --policy-color: #6366f1;
+            --dark-color: #1f2937;
+            --light-color: #f9fafb;
+            --gray-color: #6b7280;
+            --light-gray: #e5e7eb;
+            --border-radius: 20px;
+            --border-radius-sm: 12px;
+            --box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            --box-shadow-lg: 0 20px 50px -12px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ====== TYPOGRAPHY ====== */
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.75rem; }
+
+        p {
+            color: var(--gray-color);
+            margin-bottom: 1rem;
+        }
+
+        /* ====== HEADER & NAVIGATION ====== */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .logo:hover {
+            transform: translateX(5px);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(2deg); }
+        }
+
+        .logo:hover .logo-icon {
+            animation: none;
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px 15px;
+            border-radius: 50px;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-color);
+            font-weight: 600;
+            font-size: 15px;
+            padding: 8px 12px;
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition);
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Login Modal Styles */
+        .login-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .login-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-lg);
+            position: relative;
+        }
+
+        .login-content h2 {
+            color: var(--dark-color);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius-sm);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .login-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .login-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .login-links {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .login-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .login-links a:hover {
+            text-decoration: underline;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--gray-color);
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            color: var(--dark-color);
+            transform: scale(1.1);
+        }
+
+        /* User Menu Styles */
+        .user-menu-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-login-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .nav-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-avatar-btn {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .user-avatar-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: var(--box-shadow-lg);
+            border-radius: var(--border-radius-sm);
+            z-index: 100;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .user-menu:hover .user-dropdown {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 14px 20px;
+            cursor: pointer;
+            color: var(--dark-color);
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+            border-bottom: 1px solid var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--primary-color);
+            padding-left: 25px;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        /* ====== MAIN CONTENT ====== */
+        main {
+            padding: 80px 0;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            text-align: center;
+            padding: 80px 40px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(139, 92, 246, 0.05));
+            border-radius: var(--border-radius);
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .welcome-title {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: var(--gray-color);
+        }
+
+        .planet-decoration {
+            font-size: 100px;
+            display: inline-block;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Learning Path Section */
+        .learning-path {
+            margin-bottom: 100px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Learning Grid */
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        /* Learning Cards */
+        .learning-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .learning-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--card-color), var(--card-color-light));
+        }
+
+        .learning-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        /* Card-specific colors */
+        .ecology-card { --card-color: #22c55e; --card-color-light: #86efac; }
+        .climate-card { --card-color: #f59e0b; --card-color-light: #fcd34d; }
+        .living-card { --card-color: #06b6d4; --card-color-light: #67e8f9; }
+        .waste-card { --card-color: #8b5cf6; --card-color-light: #c4b5fd; }
+        .trade-card { --card-color: #ec4899; --card-color-light: #f9a8d4; }
+        .policy-card { --card-color: #6366f1; --card-color-light: #a5b4fc; }
+
+        .card-icon {
+            font-size: 64px;
+            margin-bottom: 25px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .card-description {
+            color: var(--gray-color);
+            margin-bottom: 30px;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--gray-color);
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: var(--border-radius-sm);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-card {
+            background: linear-gradient(135deg, var(--card-color), var(--card-color-light));
+            color: white;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Continue Path Button */
+        .continue-path {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: var(--border-radius);
+            border: 2px dashed rgba(16, 185, 129, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .continue-path:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .continue-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .continue-arrow {
+            font-size: 24px;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .continue-path:hover .continue-arrow {
+            transform: translateX(10px);
+        }
+
+        /* ====== FOOTER ====== */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-title {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        /* ====== UPDATED RESPONSIVE DESIGN ====== */
+        @media (max-width: 1200px) {
+            .nav-links {
+                gap: 2px;
+            }
+            
+            .nav-links a {
+                font-size: 14px;
+                padding: 6px 8px;
+            }
+            
+            .logo-text {
+                font-size: 24px;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-wrapper {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+                padding: 10px;
+            }
+            
+            .nav-links a {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                flex-direction: column;
+            }
+            
+            .user-menu-container {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .learning-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            
+            .welcome-section {
+                padding: 40px 20px;
+            }
+            
+            .user-menu-container {
+                flex-direction: row;
+                gap: 10px;
+                width: 100%;
+            }
+            
+            .user-menu {
+                width: auto;
+            }
+            
+            .user-dropdown {
+                position: absolute;
+                width: 200px;
+                margin-top: 10px;
+            }
+            
+            .user-menu:hover .user-dropdown {
+                display: block;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .logo-icon {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        /* ====== SCROLLBAR ====== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 10px;
+        }
+
+        /* ====== NOTIFICATION ====== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease-out;
+            max-width: 400px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="home.html" class="logo">
+                    <div class="logo-icon">
+                        <img src="image/1.jpg" alt="GreenQuest Logo" class="logo-image">
+                    </div>
+                    <div class="logo-text">GreenQuest</div>
+                </a>
+                
+                <div class="nav-wrapper">
+                    <div class="user-menu-container">
+                        <div class="user-menu" id="userMenu" style="display: none;">
+                            <button class="user-avatar-btn" id="userAvatar">U</button>
+                            <div class="user-dropdown">
+                                <a href="profile.html" class="dropdown-item">
+                                    <i class="fas fa-user"></i> My Profile
+                                </a>
+                                <a href="#" class="dropdown-item" id="logoutBtn">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </div>
+                        </div>
+                        <button class="nav-login-btn" id="loginBtn">Login / Sign Up</button>
+                    </div>
+                    
+                    <div class="nav-links">
+                        <a href="home.html" class="active">Home</a>
+                        <a href="learning.html">Learning</a>
+                        <a href="challenges.html">Challenges</a>
+                        <a href="community.html">Community</a>
+                        <a href="achievements.html">Achievements</a>
+                        <a href="profile.html">Profile</a>
+                        <a href="about.html">About</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Welcome Section -->
+        <section id="home" class="welcome-section">
+            <h1 class="welcome-title">Welcome to GreenQuest!</h1>
+            <p class="welcome-subtitle">Embark on your environmental learning journey. Master these 6 essential topics to become an environmental champion.</p>
+            <div class="planet-decoration">🌎</div>
+        </section>
+
+        <!-- Learning Path Section -->
+        <section id="learning" class="learning-path">
+            <div class="section-header">
+                <h2 class="section-title">Your Learning Journey</h2>
+                <p class="section-subtitle">Follow the path of environmental mastery. Each topic builds upon the last, creating a comprehensive understanding of sustainability.</p>
+            </div>
+
+            <div class="learning-grid">
+                <!-- Ecology & Ecosystems -->
+                <div class="learning-card ecology-card" data-topic="ecology">
+                    <div class="card-icon">🌿</div>
+                    <h3 class="card-title">Ecology & Ecosystems</h3>
+                    <p class="card-description">Understand ecological systems, biodiversity, and how different species interact within their environments. Learn about conservation efforts and how to protect natural habitats.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Your Progress</span>
+                            <span class="progress-percent" id="ecologyProgress">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="ecologyProgressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-card start-learning" data-topic="ecology" data-page="ecology.html">
+                        <i class="fas fa-leaf"></i> Start Learning
+                    </button>
+                </div>
+
+                <!-- Climate Justice -->
+                <div class="learning-card climate-card" data-topic="climate">
+                    <div class="card-icon">⚖️</div>
+                    <h3 class="card-title">Climate Justice</h3>
+                    <p class="card-description">Explore climate policies from individual actions to city initiatives and international agreements. Understand social equity in climate action and environmental rights.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Your Progress</span>
+                            <span class="progress-percent" id="climateProgress">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="climateProgressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-card start-learning" data-topic="climate" data-page="climate.html">
+                        <i class="fas fa-scale-balanced"></i> Start Learning
+                    </button>
+                </div>
+
+                <!-- Sustainable Living -->
+                <div class="learning-card living-card" data-topic="living">
+                    <div class="card-icon">🌞</div>
+                    <h3 class="card-title">Sustainable Living</h3>
+                    <p class="card-description">Learn about renewable energy, green technologies, and practical steps for sustainable daily living. Reduce your ecological footprint through smart choices in energy, food, and transportation.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Your Progress</span>
+                            <span class="progress-percent" id="livingProgress">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="livingProgressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-card start-learning" data-topic="living" data-page="living.html">
+                        <i class="fas fa-home"></i> Start Learning
+                    </button>
+                </div>
+
+                <!-- Waste Management -->
+                <div class="learning-card waste-card" data-topic="waste">
+                    <div class="card-icon">🗑️</div>
+                    <h3 class="card-title">Waste Management</h3>
+                    <p class="card-description">Master the principles of reduce, reuse, and recycle. Learn about composting, circular economy, and innovative waste reduction strategies for homes and communities.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Your Progress</span>
+                            <span class="progress-percent" id="wasteProgress">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="wasteProgressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-card start-learning" data-topic="waste" data-page="waste.html">
+                        <i class="fas fa-recycle"></i> Start Learning
+                    </button>
+                </div>
+
+                <!-- Fair Trade -->
+                <div class="learning-card trade-card" data-topic="trade">
+                    <div class="card-icon">🤝</div>
+                    <h3 class="card-title">Fair Trade</h3>
+                    <p class="card-description">Understand ethical consumerism, fair labor practices, and sustainable supply chains. Learn how to support communities through conscious purchasing decisions and responsible business practices.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Your Progress</span>
+                            <span class="progress-percent" id="tradeProgress">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="tradeProgressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-card start-learning" data-topic="trade" data-page="trade.html">
+                        <i class="fas fa-handshake"></i> Start Learning
+                    </button>
+                </div>
+
+                <!-- Policy & Economy -->
+                <div class="learning-card policy-card" data-topic="policy">
+                    <div class="card-icon">📈</div>
+                    <h3 class="card-title">Policy & Economy</h3>
+                    <p class="card-description">Explore environmental economics, green policies, and sustainable development goals. Understand how policy decisions impact environmental outcomes and learn to advocate for effective change.</p>
+                    
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Your Progress</span>
+                            <span class="progress-percent" id="policyProgress">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="policyProgressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-card start-learning" data-topic="policy" data-page="policy.html">
+                        <i class="fas fa-chart-line"></i> Start Learning
+                    </button>
+                </div>
+            </div>
+
+            <!-- Continue Path Button -->
+            <div class="continue-path" id="continuePath">
+                <span class="continue-text">Continue Your Learning Journey</span>
+                <span class="continue-arrow">→</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">GreenQuest</h3>
+                    <p>Embark on an environmental learning adventure. Master sustainability through interactive learning paths.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Learning Paths</h3>
+                    <ul class="footer-links">
+                        <li><a href="ecology.html">Ecology & Ecosystems</a></li>
+                        <li><a href="climate.html">Climate Justice</a></li>
+                        <li><a href="living.html">Sustainable Living</a></li>
+                        <li><a href="waste.html">Waste Management</a></li>
+                        <li><a href="trade.html">Fair Trade</a></li>
+                        <li><a href="policy.html">Policy & Economy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="challenges.html">Daily Challenges</a></li>
+                        <li><a href="community.html">Community</a></li>
+                        <li><a href="achievements.html">Achievements</a></li>
+                        <li><a href="resources.html">Learning Resources</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2024 GreenQuest - Environmental Learning Platform
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-content">
+            <span class="close-btn" id="closeLogin">&times;</span>
+            <h2>Welcome to GreenQuest</h2>
+            <form id="loginForm" class="login-form">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div class="login-links">
+                <a href="#" id="showRegister">Create Account</a>
+                <span> | </span>
+                <a href="#" id="forgotPassword">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="login-modal">
+        <div class="login-content">
+            <span class="close-btn" id="closeRegister">&times;</span>
+            <h2>Join GreenQuest</h2>
+            <form id="registerForm" class="login-form">
+                <input type="text" id="registerName" placeholder="Full Name" required>
+                <input type="email" id="registerEmail" placeholder="Email" required>
+                <input type="password" id="registerPassword" placeholder="Password" required>
+                <input type="password" id="registerConfirm" placeholder="Confirm Password" required>
+                <button type="submit">Create Account</button>
+            </form>
+            <div class="login-links">
+                <a href="#" id="showLogin">Already have an account? Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // AUTHENTICATION SYSTEM
+        class AuthSystem {
+            constructor() {
+                this.init();
+            }
+            
+            init() {
+                this.checkLoginStatus();
+                this.setupEventListeners();
+            }
+            
+            checkLoginStatus() {
+                const user = this.getCurrentUser();
+                const loginBtn = document.getElementById('loginBtn');
+                const userMenu = document.getElementById('userMenu');
+                
+                if (user) {
+                    // User is logged in
+                    if (loginBtn) loginBtn.style.display = 'none';
+                    if (userMenu) {
+                        userMenu.style.display = 'block';
+                        const initial = user.name ? user.name.charAt(0).toUpperCase() : 'U';
+                        document.getElementById('userAvatar').textContent = initial;
+                    }
+                } else {
+                    // User is not logged in
+                    if (loginBtn) loginBtn.style.display = 'block';
+                    if (userMenu) userMenu.style.display = 'none';
+                }
+            }
+            
+            getCurrentUser() {
+                try {
+                    return JSON.parse(localStorage.getItem('greenquest_user'));
+                } catch (e) {
+                    return null;
+                }
+            }
+            
+            getAllUsers() {
+                try {
+                    return JSON.parse(localStorage.getItem('greenquest_users')) || [];
+                } catch (e) {
+                    return [];
+                }
+            }
+            
+            saveUsers(users) {
+                localStorage.setItem('greenquest_users', JSON.stringify(users));
+            }
+            
+            saveCurrentUser(user) {
+                localStorage.setItem('greenquest_user', JSON.stringify(user));
+                this.checkLoginStatus();
+            }
+            
+            logout() {
+                localStorage.removeItem('greenquest_user');
+                this.checkLoginStatus();
+                this.showNotification('Logged out successfully', 'success');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            }
+            
+            setupEventListeners() {
+                // Login button
+                const loginBtn = document.getElementById('loginBtn');
+                if (loginBtn) {
+                    loginBtn.addEventListener('click', () => this.showLoginModal());
+                }
+                
+                // Close buttons
+                const closeLogin = document.getElementById('closeLogin');
+                const closeRegister = document.getElementById('closeRegister');
+                
+                if (closeLogin) {
+                    closeLogin.addEventListener('click', () => this.hideLoginModal());
+                }
+                
+                if (closeRegister) {
+                    closeRegister.addEventListener('click', () => this.hideRegisterModal());
+                }
+                
+                // Switch between login and register
+                const showRegister = document.getElementById('showRegister');
+                const showLogin = document.getElementById('showLogin');
+                
+                if (showRegister) {
+                    showRegister.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.hideLoginModal();
+                        this.showRegisterModal();
+                    });
+                }
+                
+                if (showLogin) {
+                    showLogin.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.hideRegisterModal();
+                        this.showLoginModal();
+                    });
+                }
+                
+                // Logout button
+                const logoutBtn = document.getElementById('logoutBtn');
+                if (logoutBtn) {
+                    logoutBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.logout();
+                    });
+                }
+                
+                // Login form submission
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) {
+                    loginForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handleLogin();
+                    });
+                }
+                
+                // Register form submission
+                const registerForm = document.getElementById('registerForm');
+                if (registerForm) {
+                    registerForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.handleRegister();
+                    });
+                }
+                
+                // Close modals when clicking outside
+                window.addEventListener('click', (e) => {
+                    if (e.target.id === 'loginModal') {
+                        this.hideLoginModal();
+                    }
+                    if (e.target.id === 'registerModal') {
+                        this.hideRegisterModal();
+                    }
+                });
+            }
+            
+            showLoginModal() {
+                const modal = document.getElementById('loginModal');
+                if (modal) {
+                    modal.style.display = 'block';
+                    document.getElementById('loginEmail').focus();
+                }
+            }
+            
+            hideLoginModal() {
+                const modal = document.getElementById('loginModal');
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            }
+            
+            showRegisterModal() {
+                const modal = document.getElementById('registerModal');
+                if (modal) {
+                    modal.style.display = 'block';
+                    document.getElementById('registerName').focus();
+                }
+            }
+            
+            hideRegisterModal() {
+                const modal = document.getElementById('registerModal');
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            }
+            
+            handleLogin() {
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                
+                if (!email || !password) {
+                    this.showNotification('Please fill in all fields', 'error');
+                    return;
+                }
+                
+                const users = this.getAllUsers();
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    this.saveCurrentUser(user);
+                    this.hideLoginModal();
+                    this.showNotification('Welcome back to GreenQuest!', 'success');
+                    
+                    // Reset form
+                    document.getElementById('loginForm').reset();
+                    
+                    // Reload page to update UI
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
+                } else {
+                    this.showNotification('Invalid email or password', 'error');
+                }
+            }
+            
+            handleRegister() {
+                const name = document.getElementById('registerName').value.trim();
+                const email = document.getElementById('registerEmail').value.trim();
+                const password = document.getElementById('registerPassword').value;
+                const confirm = document.getElementById('registerConfirm').value;
+                
+                // Validation
+                if (!name || !email || !password || !confirm) {
+                    this.showNotification('Please fill in all fields', 'error');
+                    return;
+                }
+                
+                if (password !== confirm) {
+                    this.showNotification('Passwords do not match', 'error');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    this.showNotification('Password must be at least 6 characters', 'error');
+                    return;
+                }
+                
+                // Check if user already exists
+                const users = this.getAllUsers();
+                if (users.some(u => u.email === email)) {
+                    this.showNotification('Email already registered', 'error');
+                    return;
+                }
+                
+                // Create new user
+                const newUser = {
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    password: password,
+                    joinDate: new Date().toISOString(),
+                    level: 1,
+                    points: 0,
+                    completedQuests: 0,
+                    streakDays: 1
+                };
+                
+                // Save user
+                users.push(newUser);
+                this.saveUsers(users);
+                this.saveCurrentUser(newUser);
+                
+                // Initialize user progress
+                this.initializeUserProgress();
+                
+                this.hideRegisterModal();
+                this.showNotification('Welcome to GreenQuest! Your account has been created.', 'success');
+                
+                // Reset form
+                document.getElementById('registerForm').reset();
+                
+                // Reload page to update UI
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+            }
+            
+            initializeUserProgress() {
+                const progress = {
+                    ecology: 0,
+                    climate: 0,
+                    living: 0,
+                    waste: 0,
+                    trade: 0,
+                    policy: 0,
+                    visitedTopics: {
+                        ecology: false,
+                        climate: false,
+                        living: false,
+                        waste: false,
+                        trade: false,
+                        policy: false
+                    },
+                    completedLessons: {
+                        ecology: [],
+                        climate: [],
+                        living: [],
+                        waste: [],
+                        trade: [],
+                        policy: []
+                    },
+                    quizScores: {
+                        ecology: 0,
+                        climate: 0,
+                        living: 0,
+                        waste: 0,
+                        trade: 0,
+                        policy: 0
+                    }
+                };
+                
+                localStorage.setItem('greenquest_progress', JSON.stringify(progress));
+            }
+            
+            showNotification(message, type = 'info') {
+                // Remove existing notification
+                const existing = document.querySelector('.notification');
+                if (existing) {
+                    existing.remove();
+                }
+                
+                // Create notification
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.style.background = type === 'success' ? '#10b981' : 
+                                              type === 'error' ? '#ef4444' : 
+                                              type === 'warning' ? '#f59e0b' : '#3b82f6';
+                notification.innerHTML = `
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                                      type === 'error' ? 'exclamation-circle' : 
+                                      type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.style.animation = 'slideOutRight 0.3s ease-out';
+                        setTimeout(() => {
+                            if (notification.parentNode) {
+                                notification.parentNode.removeChild(notification);
+                            }
+                        }, 300);
+                    }
+                }, 3000);
+            }
+        }
+
+        // PROGRESS SYSTEM
+        class ProgressSystem {
+            constructor() {
+                this.init();
+            }
+            
+            init() {
+                this.updateProgressDisplay();
+            }
+            
+            getProgress() {
+                try {
+                    const savedProgress = localStorage.getItem('greenquest_progress');
+                    if (savedProgress) {
+                        return JSON.parse(savedProgress);
+                    }
+                    
+                    // Create fresh progress
+                    return {
+                        ecology: 0,
+                        climate: 0,
+                        living: 0,
+                        waste: 0,
+                        trade: 0,
+                        policy: 0,
+                        visitedTopics: {
+                            ecology: false,
+                            climate: false,
+                            living: false,
+                            waste: false,
+                            trade: false,
+                            policy: false
+                        },
+                        completedLessons: {
+                            ecology: [],
+                            climate: [],
+                            living: [],
+                            waste: [],
+                            trade: [],
+                            policy: []
+                        },
+                        quizScores: {
+                            ecology: 0,
+                            climate: 0,
+                            living: 0,
+                            waste: 0,
+                            trade: 0,
+                            policy: 0
+                        }
+                    };
+                } catch (error) {
+                    console.error('Error loading progress:', error);
+                    return {
+                        ecology: 0,
+                        climate: 0,
+                        living: 0,
+                        waste: 0,
+                        trade: 0,
+                        policy: 0
+                    };
+                }
+            }
+            
+            saveProgress(progress) {
+                try {
+                    localStorage.setItem('greenquest_progress', JSON.stringify(progress));
+                    return true;
+                } catch (error) {
+                    console.error('Error saving progress:', error);
+                    return false;
+                }
+            }
+            
+            updateTopicProgress(topic, percentage) {
+                const progress = this.getProgress();
+                progress[topic] = Math.min(100, Math.max(0, percentage));
+                
+                if (percentage > 0) {
+                    progress.visitedTopics[topic] = true;
+                }
+                
+                this.saveProgress(progress);
+                return progress;
+            }
+            
+            completeLesson(topic, lessonId) {
+                const progress = this.getProgress();
+                
+                if (!progress.completedLessons[topic]) {
+                    progress.completedLessons[topic] = [];
+                }
+                
+                if (!progress.completedLessons[topic].includes(lessonId)) {
+                    progress.completedLessons[topic].push(lessonId);
+                    
+                    const completedCount = progress.completedLessons[topic].length;
+                    progress[topic] = Math.min(100, completedCount * 20);
+                    
+                    this.saveProgress(progress);
+                }
+                
+                return progress;
+            }
+            
+            updateProgressDisplay() {
+                const progress = this.getProgress();
+                const topics = ['ecology', 'climate', 'living', 'waste', 'trade', 'policy'];
+                
+                topics.forEach(topic => {
+                    const percentage = progress[topic] || 0;
+                    const percentElement = document.getElementById(`${topic}Progress`);
+                    const barElement = document.getElementById(`${topic}ProgressBar`);
+                    
+                    if (percentElement) {
+                        percentElement.textContent = `${percentage}%`;
+                    }
+                    
+                    if (barElement) {
+                        barElement.style.width = `${percentage}%`;
+                        
+                        if (percentage >= 100) {
+                            barElement.style.background = 'linear-gradient(90deg, #10b981, #059669)';
+                        } else if (percentage >= 70) {
+                            barElement.style.background = 'linear-gradient(90deg, #22c55e, #86efac)';
+                        } else if (percentage >= 40) {
+                            barElement.style.background = 'linear-gradient(90deg, #f59e0b, #fcd34d)';
+                        } else {
+                            const card = barElement.closest('.learning-card');
+                            if (card) {
+                                const cardColor = getComputedStyle(card).getPropertyValue('--card-color').trim();
+                                const cardColorLight = getComputedStyle(card).getPropertyValue('--card-color-light').trim();
+                                barElement.style.background = `linear-gradient(90deg, ${cardColor}, ${cardColorLight})`;
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // PAGE INITIALIZATION
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('GreenQuest Home Page Loaded');
+            
+            // Initialize systems
+            const authSystem = new AuthSystem();
+            const progressSystem = new ProgressSystem();
+            
+            // Clear any old data
+            const oldKeys = ['userProgress', 'greenquest_initialized', 'lastVisitDate'];
+            oldKeys.forEach(key => {
+                if (localStorage.getItem(key)) {
+                    localStorage.removeItem(key);
+                }
+            });
+            
+            // Set up start learning buttons
+            document.querySelectorAll('.start-learning').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const topic = this.dataset.topic;
+                    const page = this.dataset.page;
+                    
+                    // Check if user is logged in
+                    const user = authSystem.getCurrentUser();
+                    if (!user) {
+                        authSystem.showNotification('Please login to start learning', 'warning');
+                        authSystem.showLoginModal();
+                        return;
+                    }
+                    
+                    // Mark topic as visited
+                    const progress = progressSystem.getProgress();
+                    progress.visitedTopics[topic] = true;
+                    progressSystem.saveProgress(progress);
+                    
+                    // Show loading state
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                    this.disabled = true;
+                    
+                    // Navigate to topic page
+                    setTimeout(() => {
+                        window.location.href = page;
+                    }, 300);
+                });
+            });
+            
+            // Continue Path button
+            document.getElementById('continuePath').addEventListener('click', function() {
+                const progress = progressSystem.getProgress();
+                
+                // Check if user is logged in
+                const user = authSystem.getCurrentUser();
+                if (!user) {
+                    authSystem.showNotification('Please login to continue your journey', 'warning');
+                    authSystem.showLoginModal();
+                    return;
+                }
+                
+                // Find topic with lowest progress that's been visited
+                const topics = ['ecology', 'climate', 'living', 'waste', 'trade', 'policy'];
+                let nextTopic = null;
+                let lowestProgress = 100;
+                
+                for (const topic of topics) {
+                    const topicProgress = progress[topic] || 0;
+                    const isVisited = progress.visitedTopics?.[topic] || false;
+                    
+                    if (isVisited && topicProgress < lowestProgress) {
+                        lowestProgress = topicProgress;
+                        nextTopic = topic;
+                    }
+                }
+                
+                if (!nextTopic) {
+                    nextTopic = 'ecology';
+                }
+                
+                // Scroll to the selected topic
+                const topicCard = document.querySelector(`[data-topic="${nextTopic}"]`);
+                if (topicCard) {
+                    topicCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Highlight the card
+                    topicCard.style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.5)';
+                    topicCard.style.transform = 'translateY(-5px)';
+                    
+                    setTimeout(() => {
+                        topicCard.style.boxShadow = '';
+                        topicCard.style.transform = '';
+                    }, 2000);
+                    
+                    // Show notification
+                    const topicNames = {
+                        ecology: 'Ecology & Ecosystems',
+                        climate: 'Climate Justice',
+                        living: 'Sustainable Living',
+                        waste: 'Waste Management',
+                        trade: 'Fair Trade',
+                        policy: 'Policy & Economy'
+                    };
+                    
+                    authSystem.showNotification(`Continue with ${topicNames[nextTopic]}`, 'info');
+                }
+            });
+            
+            // Add scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.learning-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Add reset button for debugging (remove in production)
+            const resetBtn = document.createElement('button');
+            resetBtn.textContent = 'Reset Progress';
+            resetBtn.style.cssText = `
+                position: fixed;
+                bottom: 70px;
+                right: 20px;
+                background: #ef4444;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 12px;
+                z-index: 1000;
+            `;
+            resetBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to reset ALL progress?')) {
+                    localStorage.removeItem('greenquest_progress');
+                    progressSystem.updateProgressDisplay();
+                    authSystem.showNotification('Progress reset successfully', 'success');
+                }
+            });
+            document.body.appendChild(resetBtn);
+            
+            // Add debug button
+            const debugBtn = document.createElement('button');
+            debugBtn.textContent = 'Debug';
+            debugBtn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: #3b82f6;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 12px;
+                z-index: 1000;
+            `;
+            debugBtn.addEventListener('click', function() {
+                const progress = progressSystem.getProgress();
+                const user = authSystem.getCurrentUser();
+                alert(`Current User: ${user ? user.name : 'Not logged in'}\n\nProgress:\nEcology: ${progress.ecology}%\nClimate: ${progress.climate}%\nLiving: ${progress.living}%\nWaste: ${progress.waste}%\nTrade: ${progress.trade}%\nPolicy: ${progress.policy}%`);
+            });
+            document.body.appendChild(debugBtn);
+            
+            console.log('Page initialization complete');
+        });
+        
+        // Update progress when page becomes visible
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                const progressSystem = new ProgressSystem();
+                progressSystem.updateProgressDisplay();
+            }
+        });
+        
+        // Listen for storage events
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'greenquest_progress') {
+                console.log('Progress updated in another tab, refreshing...');
+                const progressSystem = new ProgressSystem();
+                progressSystem.updateProgressDisplay();
+            }
+        });
+    </script>
+</body>
+</html>

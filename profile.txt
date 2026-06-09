@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - GreenQuest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ====== CSS VARIABLES & BASE STYLES ====== */
+        :root {
+            --primary-color: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #a7f3d0;
+            --secondary-color: #3b82f6;
+            --accent-color: #8b5cf6;
+            --ecology-color: #22c55e;
+            --climate-color: #f59e0b;
+            --living-color: #06b6d4;
+            --waste-color: #8b5cf6;
+            --trade-color: #ec4899;
+            --policy-color: #6366f1;
+            --dark-color: #1f2937;
+            --light-color: #f9fafb;
+            --gray-color: #6b7280;
+            --light-gray: #e5e7eb;
+            --border-radius: 20px;
+            --border-radius-sm: 12px;
+            --box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            --box-shadow-lg: 0 20px 50px -12px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: linear-gradient(135deg, #f0fdf4 0%, #f8fafc 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ====== TYPOGRAPHY ====== */
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.75rem; }
+
+        p {
+            color: var(--gray-color);
+            margin-bottom: 1rem;
+        }
+
+        /* ====== HEADER & NAVIGATION ====== */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: translateX(5px);
+        }
+
+        .logo-icon {
+            font-size: 36px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-color);
+            font-weight: 600;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Login Modal Styles */
+        .login-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .login-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow-lg);
+            position: relative;
+        }
+
+        .login-content h2 {
+            color: var(--dark-color);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius-sm);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .login-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .login-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .login-links {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .login-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .login-links a:hover {
+            text-decoration: underline;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--gray-color);
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            color: var(--dark-color);
+            transform: scale(1.1);
+        }
+
+        /* User Menu Styles */
+        .user-menu-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-login-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .nav-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-avatar-btn {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .user-avatar-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .user-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: var(--box-shadow-lg);
+            border-radius: var(--border-radius-sm);
+            z-index: 100;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .user-menu:hover .user-dropdown {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 14px 20px;
+            cursor: pointer;
+            color: var(--dark-color);
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+            border-bottom: 1px solid var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--primary-color);
+            padding-left: 25px;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        /* ====== PROFILE PAGE SPECIFIC STYLES ====== */
+        main {
+            padding: 60px 0;
+            min-height: 70vh;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 50px;
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2310b981' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.1;
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--primary-color);
+            border: 4px solid white;
+            box-shadow: var(--box-shadow);
+        }
+
+        .profile-text h1 {
+            color: white;
+            margin-bottom: 5px;
+            font-size: 2.5rem;
+        }
+
+        .profile-text p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            display: block;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 5px;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .topic-progress {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .topic-item {
+            background: var(--light-color);
+            padding: 25px;
+            border-radius: var(--border-radius-sm);
+            border-left: 4px solid var(--topic-color);
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .topic-percent {
+            font-weight: 700;
+            color: var(--topic-color);
+        }
+
+        .topic-progress-bar {
+            height: 10px;
+            background: var(--light-gray);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .topic-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--topic-color), var(--topic-color-light));
+            border-radius: 5px;
+            transition: width 1s ease-out;
+        }
+
+        /* Badges Section */
+        .badges-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .badge-item {
+            background: var(--light-color);
+            padding: 25px;
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .badge-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .badge-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 30px;
+            color: white;
+        }
+
+        .badge-name {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+
+        .badge-desc {
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+
+        /* Recent Activity */
+        .activity-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: var(--light-color);
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition);
+        }
+
+        .activity-item:hover {
+            background: rgba(16, 185, 129, 0.05);
+            transform: translateX(5px);
+        }
+
+        .activity-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+
+        .activity-time {
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+
+        .activity-points {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: var(--border-radius-sm);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: rgba(16, 185, 129, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ====== FOOTER ====== */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-title {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .profile-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .profile-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .topic-progress {
+                grid-template-columns: 1fr;
+            }
+            
+            .badges-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            
+            .user-menu-container {
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .badges-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ====== SCROLLBAR ====== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 10px;
+        }
+
+        /* ====== NOTIFICATION ====== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease-out;
+            max-width: 400px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="home.html" class="logo">
+    		  <div class="logo-icon">
+        	    <img src="image/1.jpg" alt="GreenQuest Logo" style="width: 100%; height: 100%; object-fit: contain;">
+    	</div>
+    	<div class="logo-text">GreenQuest</div>
+    </a>
+                
+                <nav>
+                    <div class="user-menu-container">
+                        <div class="user-menu" id="userMenu" style="display: none;">
+                            <button class="user-avatar-btn" id="userAvatar">U</button>
+                            <div class="user-dropdown">
+                                <a href="profile.html" class="dropdown-item active">
+                                    <i class="fas fa-user"></i> My Profile
+                                </a>
+                                <a href="#" class="dropdown-item" id="logoutBtn">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </a>
+                            </div>
+                        </div>
+                        <button class="nav-login-btn" id="loginBtn">Login / Sign Up</button>
+                        
+                        <div class="nav-links">
+                            <a href="home.html">Home</a>
+                            <a href="learning.html">Learning</a>
+                            <a href="challenges.html">Challenges</a>
+                            <a href="community.html">Community</a>
+                            <a href="achievements.html">Achievements</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Profile Header -->
+        <section class="profile-header">
+            <div class="profile-info">
+                <div class="profile-avatar" id="profileAvatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-text">
+                    <h1 id="userName">Environmental Hero</h1>
+                    <p id="userEmail">hero@greenquest.com</p>
+                    <p id="userLevel">Level 1 Eco-Warrior</p>
+                    <button class="btn btn-primary" id="editProfileBtn">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+            </div>
+            
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="questsCompleted">0</span>
+                    <span class="stat-label">Quests Completed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="ecoPoints">0</span>
+                    <span class="stat-label">Eco Points</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="streakDays">1</span>
+                    <span class="stat-label">Day Streak</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="carbonSaved">0</span>
+                    <span class="stat-label">kg CO₂ Saved</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Progress Section -->
+        <section class="progress-section">
+            <h2 class="section-title">Learning Progress</h2>
+            <div class="topic-progress" id="topicProgress">
+                <!-- Topics will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Badges Section -->
+        <section class="badges-section">
+            <h2 class="section-title">Badges Earned</h2>
+            <div class="badges-grid" id="badgesGrid">
+                <!-- Badges will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="activity-section">
+            <h2 class="section-title">Recent Activity</h2>
+            <div class="activity-list" id="activityList">
+                <!-- Activities will be dynamically added here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">GreenQuest</h3>
+                    <p>Embark on an environmental learning adventure. Master sustainability through interactive learning paths.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Learning Paths</h3>
+                    <ul class="footer-links">
+                        <li><a href="ecology.html">Ecology & Ecosystems</a></li>
+                        <li><a href="climate.html">Climate Justice</a></li>
+                        <li><a href="living.html">Sustainable Living</a></li>
+                        <li><a href="waste.html">Waste Management</a></li>
+                        <li><a href="trade.html">Fair Trade</a></li>
+                        <li><a href="policy.html">Policy & Economy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="challenges.html">Daily Challenges</a></li>
+                        <li><a href="community.html">Community</a></li>
+                        <li><a href="achievements.html">Achievements</a></li>
+                        <li><a href="resources.html">Learning Resources</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2024 GreenQuest - Environmental Learning Platform
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-content">
+            <span class="close-btn" id="closeLogin">&times;</span>
+            <h2>Welcome to GreenQuest</h2>
+            <form id="loginForm" class="login-form">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div class="login-links">
+                <a href="#" id="showRegister">Create Account</a>
+                <span> | </span>
+                <a href="#" id="forgotPassword">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="login-modal">
+        <div class="login-content">
+            <span class="close-btn" id="closeRegister">&times;</span>
+            <h2>Join GreenQuest</h2>
+            <form id="registerForm" class="login-form">
+                <input type="text" id="registerName" placeholder="Full Name" required>
+                <input type="email" id="registerEmail" placeholder="Email" required>
+                <input type="password" id="registerPassword" placeholder="Password" required>
+                <input type="password" id="registerConfirm" placeholder="Confirm Password" required>
+                <button type="submit">Create Account</button>
+            </form>
+            <div class="login-links">
+                <a href="#" id="showLogin">Already have an account? Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Modal -->
+    <div id="editProfileModal" class="login-modal">
+        <div class="login-content">
+            <span class="close-btn" id="closeEditProfile">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="editProfileForm" class="login-form">
+                <input type="text" id="editName" placeholder="Full Name" required>
+                <input type="email" id="editEmail" placeholder="Email" required>
+                <input type="text" id="editBio" placeholder="Bio (Optional)">
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Debug logging
+        console.log('Profile page loading...');
+
+        // SIMPLE AUTH SYSTEM
+        class AuthSystem {
+            constructor() {
+                console.log('AuthSystem initialized');
+                this.init();
+            }
+            
+            init() {
+                this.checkLoginStatus();
+                this.setupEventListeners();
+            }
+            
+            checkLoginStatus() {
+                console.log('Checking login status...');
+                const user = this.getCurrentUser();
+                const loginBtn = document.getElementById('loginBtn');
+                const userMenu = document.getElementById('userMenu');
+                
+                console.log('User found:', user);
+                
+                if (user) {
+                    // User is logged in
+                    console.log('User is logged in:', user.name);
+                    if (loginBtn) loginBtn.style.display = 'none';
+                    if (userMenu) {
+                        userMenu.style.display = 'block';
+                        const initial = user.name ? user.name.charAt(0).toUpperCase() : 'U';
+                        document.getElementById('userAvatar').textContent = initial;
+                    }
+                } else {
+                    // User is not logged in
+                    console.log('No user logged in');
+                    if (loginBtn) loginBtn.style.display = 'block';
+                    if (userMenu) userMenu.style.display = 'none';
+                    
+                    // Show login modal if on profile page
+                    if (window.location.pathname.includes('profile.html')) {
+                        console.log('On profile page without login, showing modal');
+                        this.showLoginModal();
+                    }
+                }
+            }
+            
+            getCurrentUser() {
+                try {
+                    const user = localStorage.getItem('greenquest_user');
+                    console.log('Raw user from localStorage:', user);
+                    if (!user) {
+                        console.log('No user data in localStorage');
+                        return null;
+                    }
+                    const parsed = JSON.parse(user);
+                    console.log('Parsed user:', parsed);
+                    return parsed;
+                } catch (e) {
+                    console.error('Error parsing user:', e);
+                    return null;
+                }
+            }
+            
+            getAllUsers() {
+                try {
+                    const users = localStorage.getItem('greenquest_users');
+                    if (!users) {
+                        console.log('No users in localStorage, returning empty array');
+                        return [];
+                    }
+                    return JSON.parse(users);
+                } catch (e) {
+                    console.error('Error parsing users:', e);
+                    return [];
+                }
+            }
+            
+            saveUsers(users) {
+                localStorage.setItem('greenquest_users', JSON.stringify(users));
+                console.log('Users saved:', users);
+            }
+            
+            saveCurrentUser(user) {
+                localStorage.setItem('greenquest_user', JSON.stringify(user));
+                console.log('Current user saved:', user);
+                this.checkLoginStatus();
+            }
+            
+            logout() {
+                console.log('Logging out...');
+                localStorage.removeItem('greenquest_user');
+                this.showNotification('Logged out successfully', 'success');
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1000);
+            }
+            
+            setupEventListeners() {
+                console.log('Setting up event listeners...');
+                
+                // Login button
+                const loginBtn = document.getElementById('loginBtn');
+                if (loginBtn) {
+                    loginBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        console.log('Login button clicked');
+                        this.showLoginModal();
+                    });
+                }
+                
+                // Close buttons
+                const closeLogin = document.getElementById('closeLogin');
+                const closeRegister = document.getElementById('closeRegister');
+                const closeEditProfile = document.getElementById('closeEditProfile');
+                
+                if (closeLogin) {
+                    closeLogin.addEventListener('click', () => {
+                        console.log('Close login clicked');
+                        this.hideLoginModal();
+                    });
+                }
+                
+                if (closeRegister) {
+                    closeRegister.addEventListener('click', () => {
+                        console.log('Close register clicked');
+                        this.hideRegisterModal();
+                    });
+                }
+                
+                if (closeEditProfile) {
+                    closeEditProfile.addEventListener('click', () => {
+                        console.log('Close edit profile clicked');
+                        this.hideEditProfileModal();
+                    });
+                }
+                
+                // Switch between login and register
+                const showRegister = document.getElementById('showRegister');
+                const showLogin = document.getElementById('showLogin');
+                
+                if (showRegister) {
+                    showRegister.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        console.log('Show register clicked');
+                        this.hideLoginModal();
+                        this.showRegisterModal();
+                    });
+                }
+                
+                if (showLogin) {
+                    showLogin.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        console.log('Show login clicked');
+                        this.hideRegisterModal();
+                        this.showLoginModal();
+                    });
+                }
+                
+                // Logout button
+                const logoutBtn = document.getElementById('logoutBtn');
+                if (logoutBtn) {
+                    logoutBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        console.log('Logout button clicked');
+                        this.logout();
+                    });
+                }
+                
+                // Login form submission
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) {
+                    loginForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        console.log('Login form submitted');
+                        this.handleLogin();
+                    });
+                }
+                
+                // Register form submission
+                const registerForm = document.getElementById('registerForm');
+                if (registerForm) {
+                    registerForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        console.log('Register form submitted');
+                        this.handleRegister();
+                    });
+                }
+                
+                // Edit profile form submission
+                const editProfileForm = document.getElementById('editProfileForm');
+                if (editProfileForm) {
+                    editProfileForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        console.log('Edit profile form submitted');
+                        this.handleEditProfile();
+                    });
+                }
+                
+                // Close modals when clicking outside
+                window.addEventListener('click', (e) => {
+                    if (e.target.id === 'loginModal') {
+                        this.hideLoginModal();
+                    }
+                    if (e.target.id === 'registerModal') {
+                        this.hideRegisterModal();
+                    }
+                    if (e.target.id === 'editProfileModal') {
+                        this.hideEditProfileModal();
+                    }
+                });
+            }
+            
+            showLoginModal() {
+                console.log('Showing login modal');
+                const modal = document.getElementById('loginModal');
+                if (modal) {
+                    modal.style.display = 'block';
+                    document.getElementById('loginEmail').focus();
+                }
+            }
+            
+            hideLoginModal() {
+                console.log('Hiding login modal');
+                const modal = document.getElementById('loginModal');
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            }
+            
+            showRegisterModal() {
+                console.log('Showing register modal');
+                const modal = document.getElementById('registerModal');
+                if (modal) {
+                    modal.style.display = 'block';
+                    document.getElementById('registerName').focus();
+                }
+            }
+            
+            hideRegisterModal() {
+                console.log('Hiding register modal');
+                const modal = document.getElementById('registerModal');
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            }
+            
+            showEditProfileModal() {
+                console.log('Showing edit profile modal');
+                const modal = document.getElementById('editProfileModal');
+                if (modal) {
+                    const user = this.getCurrentUser();
+                    if (user) {
+                        document.getElementById('editName').value = user.name || '';
+                        document.getElementById('editEmail').value = user.email || '';
+                        document.getElementById('editBio').value = user.bio || '';
+                    }
+                    modal.style.display = 'block';
+                }
+            }
+            
+            hideEditProfileModal() {
+                console.log('Hiding edit profile modal');
+                const modal = document.getElementById('editProfileModal');
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            }
+            
+            handleLogin() {
+                console.log('Handling login...');
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                
+                console.log('Login attempt:', { email, passwordLength: password.length });
+                
+                if (!email || !password) {
+                    this.showNotification('Please fill in all fields', 'error');
+                    return;
+                }
+                
+                const users = this.getAllUsers();
+                console.log('All users:', users);
+                
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    console.log('Login successful:', user);
+                    this.saveCurrentUser(user);
+                    this.hideLoginModal();
+                    this.showNotification('Welcome back to GreenQuest!', 'success');
+                    
+                    // Reset form
+                    document.getElementById('loginForm').reset();
+                    
+                    // Reload page
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
+                } else {
+                    console.log('Login failed: invalid credentials');
+                    this.showNotification('Invalid email or password', 'error');
+                }
+            }
+            
+            handleRegister() {
+                console.log('Handling registration...');
+                const name = document.getElementById('registerName').value.trim();
+                const email = document.getElementById('registerEmail').value.trim();
+                const password = document.getElementById('registerPassword').value;
+                const confirm = document.getElementById('registerConfirm').value;
+                
+                console.log('Registration attempt:', { name, email, passwordLength: password.length });
+                
+                // Validation
+                if (!name || !email || !password || !confirm) {
+                    this.showNotification('Please fill in all fields', 'error');
+                    return;
+                }
+                
+                if (password !== confirm) {
+                    this.showNotification('Passwords do not match', 'error');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    this.showNotification('Password must be at least 6 characters', 'error');
+                    return;
+                }
+                
+                // Check if user already exists
+                const users = this.getAllUsers();
+                if (users.some(u => u.email === email)) {
+                    this.showNotification('Email already registered', 'error');
+                    return;
+                }
+                
+                // Create new user
+                const newUser = {
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    password: password,
+                    joinDate: new Date().toISOString(),
+                    bio: '',
+                    level: 1,
+                    points: 0,
+                    completedQuests: 0,
+                    streakDays: 1,
+                    carbonSaved: 0
+                };
+                
+                console.log('New user created:', newUser);
+                
+                // Save user
+                users.push(newUser);
+                this.saveUsers(users);
+                this.saveCurrentUser(newUser);
+                
+                // Initialize user progress
+                this.initializeUserProgress();
+                
+                this.hideRegisterModal();
+                this.showNotification('Welcome to GreenQuest! Your account has been created.', 'success');
+                
+                // Reset form
+                document.getElementById('registerForm').reset();
+                
+                // Reload page
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+            }
+            
+            handleEditProfile() {
+                console.log('Handling edit profile...');
+                const name = document.getElementById('editName').value.trim();
+                const email = document.getElementById('editEmail').value.trim();
+                const bio = document.getElementById('editBio').value.trim();
+                
+                if (!name || !email) {
+                    this.showNotification('Name and email are required', 'error');
+                    return;
+                }
+                
+                const user = this.getCurrentUser();
+                const users = this.getAllUsers();
+                
+                // Check if email is already taken by another user
+                if (email !== user.email && users.some(u => u.email === email)) {
+                    this.showNotification('Email already taken by another user', 'error');
+                    return;
+                }
+                
+                // Update user
+                user.name = name;
+                user.email = email;
+                if (bio) user.bio = bio;
+                
+                console.log('Updated user:', user);
+                
+                // Update in users array
+                const userIndex = users.findIndex(u => u.id === user.id);
+                if (userIndex !== -1) {
+                    users[userIndex] = user;
+                    this.saveUsers(users);
+                }
+                
+                this.saveCurrentUser(user);
+                this.hideEditProfileModal();
+                this.showNotification('Profile updated successfully', 'success');
+                
+                // Update display
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            }
+            
+            initializeUserProgress() {
+                console.log('Initializing user progress...');
+                const progress = {
+                    ecology: 0,
+                    climate: 0,
+                    living: 0,
+                    waste: 0,
+                    trade: 0,
+                    policy: 0,
+                    visitedTopics: {
+                        ecology: false,
+                        climate: false,
+                        living: false,
+                        waste: false,
+                        trade: false,
+                        policy: false
+                    },
+                    completedLessons: {
+                        ecology: [],
+                        climate: [],
+                        living: [],
+                        waste: [],
+                        trade: [],
+                        policy: []
+                    },
+                    quizScores: {
+                        ecology: 0,
+                        climate: 0,
+                        living: 0,
+                        waste: 0,
+                        trade: 0,
+                        policy: 0
+                    }
+                };
+                
+                localStorage.setItem('greenquest_progress', JSON.stringify(progress));
+                console.log('Progress initialized:', progress);
+            }
+            
+            showNotification(message, type = 'info') {
+                console.log('Showing notification:', { message, type });
+                
+                // Remove existing notification
+                const existing = document.querySelector('.notification');
+                if (existing) {
+                    existing.remove();
+                }
+                
+                // Create notification
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.style.background = type === 'success' ? '#10b981' : 
+                                              type === 'error' ? '#ef4444' : 
+                                              type === 'warning' ? '#f59e0b' : '#3b82f6';
+                notification.innerHTML = `
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 
+                                      type === 'error' ? 'exclamation-circle' : 
+                                      type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.style.animation = 'slideOutRight 0.3s ease-out';
+                        setTimeout(() => {
+                            if (notification.parentNode) {
+                                notification.parentNode.removeChild(notification);
+                            }
+                        }, 300);
+                    }
+                }, 3000);
+            }
+        }
+
+        // PROFILE SYSTEM
+        class ProfileSystem {
+            constructor(authSystem) {
+                console.log('ProfileSystem initialized');
+                this.auth = authSystem;
+                this.init();
+            }
+            
+            init() {
+                console.log('Loading profile data...');
+                this.loadProfileData();
+                this.setupEventListeners();
+            }
+            
+            loadProfileData() {
+                const user = this.auth.getCurrentUser();
+                console.log('Loading profile for user:', user);
+                
+                if (!user) {
+                    console.log('No user found, redirecting to home');
+                    return;
+                }
+                
+                // Update basic profile info
+                document.getElementById('userName').textContent = user.name || 'Environmental Hero';
+                document.getElementById('userEmail').textContent = user.email || 'user@example.com';
+                document.getElementById('userLevel').textContent = `Level ${user.level || 1} Eco-Warrior`;
+                
+                // Update avatar
+                const initial = user.name ? user.name.charAt(0).toUpperCase() : 'U';
+                document.getElementById('profileAvatar').innerHTML = initial;
+                
+                // Update stats
+                this.updateStats(user);
+                
+                // Load learning progress
+                this.loadLearningProgress();
+                
+                // Load badges
+                this.loadBadges();
+                
+                // Load recent activity
+                this.loadRecentActivity();
+            }
+            
+            updateStats(user) {
+                console.log('Updating stats for user:', user);
+                const progress = this.getProgress();
+                const topics = ['ecology', 'climate', 'living', 'waste', 'trade', 'policy'];
+                
+                // Calculate total progress
+                let totalProgress = 0;
+                topics.forEach(topic => {
+                    totalProgress += progress[topic] || 0;
+                });
+                const avgProgress = Math.round(totalProgress / topics.length);
+                
+                // Calculate completed quests
+                let completedQuests = 0;
+                topics.forEach(topic => {
+                    completedQuests += Math.floor((progress[topic] || 0) / 20);
+                });
+                
+                // Calculate eco points (10 points per % progress)
+                const ecoPoints = Math.round(avgProgress * 10);
+                
+                // Calculate carbon saved (2kg per % progress)
+                const carbonSaved = Math.round(avgProgress * 2);
+                
+                console.log('Calculated stats:', {
+                    completedQuests,
+                    ecoPoints,
+                    carbonSaved,
+                    avgProgress
+                });
+                
+                // Update DOM
+                document.getElementById('questsCompleted').textContent = completedQuests;
+                document.getElementById('ecoPoints').textContent = ecoPoints.toLocaleString();
+                document.getElementById('streakDays').textContent = user.streakDays || 1;
+                document.getElementById('carbonSaved').textContent = carbonSaved;
+                
+                // Update user object
+                user.completedQuests = completedQuests;
+                user.points = ecoPoints;
+                user.carbonSaved = carbonSaved;
+                
+                // Update level based on points
+                const newLevel = Math.floor(ecoPoints / 100) + 1;
+                if (newLevel !== user.level) {
+                    user.level = newLevel;
+                    document.getElementById('userLevel').textContent = `Level ${newLevel} Eco-Warrior`;
+                    this.auth.saveCurrentUser(user);
+                }
+            }
+            
+            getProgress() {
+                try {
+                    const progress = localStorage.getItem('greenquest_progress');
+                    console.log('Raw progress from localStorage:', progress);
+                    
+                    if (!progress) {
+                        console.log('No progress found, creating default');
+                        return {
+                            ecology: 0, 
+                            climate: 0, 
+                            living: 0, 
+                            waste: 0, 
+                            trade: 0, 
+                            policy: 0
+                        };
+                    }
+                    
+                    const parsed = JSON.parse(progress);
+                    console.log('Parsed progress:', parsed);
+                    return parsed;
+                    
+                } catch (e) {
+                    console.error('Error parsing progress:', e);
+                    return { 
+                        ecology: 0, 
+                        climate: 0, 
+                        living: 0, 
+                        waste: 0, 
+                        trade: 0, 
+                        policy: 0 
+                    };
+                }
+            }
+            
+            loadLearningProgress() {
+                console.log('Loading learning progress...');
+                const progress = this.getProgress();
+                const topics = [
+                    { 
+                        id: 'ecology', 
+                        name: 'Ecology & Ecosystems', 
+                        icon: '🌿', 
+                        color: '#22c55e', 
+                        light: '#86efac' 
+                    },
+                    { 
+                        id: 'climate', 
+                        name: 'Climate Justice', 
+                        icon: '⚖️', 
+                        color: '#f59e0b', 
+                        light: '#fcd34d' 
+                    },
+                    { 
+                        id: 'living', 
+                        name: 'Sustainable Living', 
+                        icon: '🌞', 
+                        color: '#06b6d4', 
+                        light: '#67e8f9' 
+                    },
+                    { 
+                        id: 'waste', 
+                        name: 'Waste Management', 
+                        icon: '🗑️', 
+                        color: '#8b5cf6', 
+                        light: '#c4b5fd' 
+                    },
+                    { 
+                        id: 'trade', 
+                        name: 'Fair Trade', 
+                        icon: '🤝', 
+                        color: '#ec4899', 
+                        light: '#f9a8d4' 
+                    },
+                    { 
+                        id: 'policy', 
+                        name: 'Policy & Economy', 
+                        icon: '📈', 
+                        color: '#6366f1', 
+                        light: '#a5b4fc' 
+                    }
+                ];
+                
+                const container = document.getElementById('topicProgress');
+                if (!container) {
+                    console.error('Topic progress container not found!');
+                    return;
+                }
+                
+                console.log('Progress data for topics:', progress);
+                
+                container.innerHTML = topics.map(topic => {
+                    const percentage = progress[topic.id] || 0;
+                    console.log(`Topic ${topic.id}: ${percentage}%`);
+                    return `
+                        <div class="topic-item" style="--topic-color: ${topic.color}; --topic-color-light: ${topic.light}">
+                            <div class="topic-header">
+                                <div class="topic-name">
+                                    <span>${topic.icon}</span>
+                                    <span>${topic.name}</span>
+                                </div>
+                                <div class="topic-percent">${percentage}%</div>
+                            </div>
+                            <div class="topic-progress-bar">
+                                <div class="topic-progress-fill" style="width: ${percentage}%"></div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                console.log('Learning progress loaded');
+            }
+            
+            loadBadges() {
+                console.log('Loading badges...');
+                const progress = this.getProgress();
+                const user = this.auth.getCurrentUser();
+                const badges = [];
+                
+                // Progress-based badges
+                const totalProgress = Object.values(progress).reduce((a, b) => a + b, 0);
+                const avgProgress = totalProgress / 6;
+                
+                console.log('Average progress for badges:', avgProgress);
+                
+                if (avgProgress >= 20) {
+                    badges.push({
+                        icon: '🌱',
+                        name: 'Green Sprout',
+                        desc: 'Completed 20% of learning path'
+                    });
+                }
+                
+                if (avgProgress >= 50) {
+                    badges.push({
+                        icon: '🌿',
+                        name: 'Eco Explorer',
+                        desc: 'Completed 50% of learning path'
+                    });
+                }
+                
+                if (avgProgress >= 80) {
+                    badges.push({
+                        icon: '🌳',
+                        name: 'Forest Guardian',
+                        desc: 'Completed 80% of learning path'
+                    });
+                }
+                
+                if (avgProgress === 100) {
+                    badges.push({
+                        icon: '🏆',
+                        name: 'Earth Champion',
+                        desc: 'Completed entire learning path'
+                    });
+                }
+                
+                // Streak badges
+                if (user.streakDays >= 7) {
+                    badges.push({
+                        icon: '🔥',
+                        name: 'Weekly Warrior',
+                        desc: '7-day streak'
+                    });
+                }
+                
+                if (user.streakDays >= 30) {
+                    badges.push({
+                        icon: '⭐',
+                        name: 'Monthly Master',
+                        desc: '30-day streak'
+                    });
+                }
+                
+                // Always show some starter badges
+                badges.push({
+                    icon: '🎯',
+                    name: 'First Quest',
+                    desc: 'Completed your first quest'
+                });
+                
+                badges.push({
+                    icon: '🤝',
+                    name: 'Community Helper',
+                    desc: 'Joined the community'
+                });
+                
+                const container = document.getElementById('badgesGrid');
+                if (!container) {
+                    console.error('Badges grid container not found!');
+                    return;
+                }
+                
+                if (badges.length === 0) {
+                    container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: var(--gray-color);">No badges earned yet. Start learning to earn your first badge!</p>';
+                    return;
+                }
+                
+                container.innerHTML = badges.map(badge => `
+                    <div class="badge-item">
+                        <div class="badge-icon">${badge.icon}</div>
+                        <div class="badge-name">${badge.name}</div>
+                        <div class="badge-desc">${badge.desc}</div>
+                    </div>
+                `).join('');
+                
+                console.log('Badges loaded:', badges.length);
+            }
+            
+            loadRecentActivity() {
+                console.log('Loading recent activity...');
+                const activities = [
+                    { icon: '📚', title: 'Started Ecology course', time: 'Today', points: '+10' },
+                    { icon: '✅', title: 'Completed Climate Justice quiz', time: 'Yesterday', points: '+25' },
+                    { icon: '🌱', title: 'Planted virtual tree', time: '2 days ago', points: '+50' },
+                    { icon: '🔄', title: 'Learned about recycling', time: '3 days ago', points: '+15' },
+                    { icon: '🏆', title: 'Earned Green Sprout badge', time: '1 week ago', points: '+100' }
+                ];
+                
+                const container = document.getElementById('activityList');
+                if (!container) {
+                    console.error('Activity list container not found!');
+                    return;
+                }
+                
+                container.innerHTML = activities.map(activity => `
+                    <div class="activity-item">
+                        <div class="activity-icon">${activity.icon}</div>
+                        <div class="activity-content">
+                            <div class="activity-title">${activity.title}</div>
+                            <div class="activity-time">${activity.time}</div>
+                        </div>
+                        <div class="activity-points">${activity.points}</div>
+                    </div>
+                `).join('');
+                
+                console.log('Recent activity loaded');
+            }
+            
+            setupEventListeners() {
+                console.log('Setting up profile event listeners...');
+                
+                // Edit profile button
+                const editProfileBtn = document.getElementById('editProfileBtn');
+                if (editProfileBtn) {
+                    editProfileBtn.addEventListener('click', () => {
+                        console.log('Edit profile button clicked');
+                        this.auth.showEditProfileModal();
+                    });
+                }
+            }
+        }
+
+        // PAGE INITIALIZATION
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded - Initializing profile page...');
+            
+            try {
+                // Initialize systems
+                const authSystem = new AuthSystem();
+                const profileSystem = new ProfileSystem(authSystem);
+                
+                // Debug: Check all localStorage data
+                console.log('=== LOCALSTORAGE DEBUG ===');
+                console.log('greenquest_user:', localStorage.getItem('greenquest_user'));
+                console.log('greenquest_users:', localStorage.getItem('greenquest_users'));
+                console.log('greenquest_progress:', localStorage.getItem('greenquest_progress'));
+                console.log('==========================');
+                
+                // Add debug button to page
+                const debugBtn = document.createElement('button');
+                debugBtn.textContent = 'Debug Info';
+                debugBtn.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: #3b82f6;
+                    color: white;
+                    border: none;
+                    padding: 10px 15px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 12px;
+                    z-index: 1000;
+                `;
+                debugBtn.addEventListener('click', function() {
+                    const user = authSystem.getCurrentUser();
+                    const progress = profileSystem.getProgress();
+                    
+                    alert(`User: ${user ? user.name : 'Not logged in'}\n\nProgress:\nEcology: ${progress.ecology}%\nClimate: ${progress.climate}%\nLiving: ${progress.living}%\nWaste: ${progress.waste}%\nTrade: ${progress.trade}%\nPolicy: ${progress.policy}%`);
+                });
+                document.body.appendChild(debugBtn);
+                
+                console.log('Profile page initialization complete');
+                
+            } catch (error) {
+                console.error('Error during initialization:', error);
+                alert('There was an error loading the profile page. Please try refreshing.');
+            }
+        });
+
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                console.log('Page became visible, refreshing data...');
+                // Refresh user status if needed
+                const authSystem = new AuthSystem();
+                authSystem.checkLoginStatus();
+            }
+        });
+    </script>
+</body>
+</html>
